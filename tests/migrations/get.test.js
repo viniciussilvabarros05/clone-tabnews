@@ -4,6 +4,7 @@ async function cleanDatabase() {
   await database.query("drop schema public cascade; create schema public;");
 }
 
+//executa função antes do teste
 beforeAll(cleanDatabase);
 
 test("GET to /api/v1/migrations should return 200", async () => {
