@@ -6,8 +6,6 @@ async function query(queryObject) {
     client = await getNewClient();
     const result = await client.query(queryObject);
     return result;
-  } catch (error) {
-    throw error;
   } finally {
     await client.end();
   }
@@ -26,10 +24,12 @@ async function getNewClient() {
   return client;
 }
 
-export default {
+const database = {
   query,
   getNewClient,
 };
+
+export default database;
 
 function getSSLValues() {
   return process.env.NODE_ENV === "production" ? true : false;
