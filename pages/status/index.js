@@ -25,11 +25,10 @@ function UpdateAt() {
   const { isLoading, data } = useSWR("/api/v1/status", fetchAPI, {
     refreshInterval: 2000,
   });
-
-  let updateAtText = "Carregando...";
+  const loading = "Carregando...";
   if (!isLoading && data) {
-    const updateAt = new Date(data.updated_at);
-    updateAtText = updateAt.toLocaleString("pt-BR", {
+    const { opened_connections, max_connections } = data.dependencies.database;
+    const updateAt = new Date(data.updated_at).toLocaleString("pt-BR", {
       day: "2-digit",
       month: "long",
       year: "numeric",
@@ -37,16 +36,31 @@ function UpdateAt() {
       minute: "2-digit",
       second: "2-digit",
     });
-  }
 
-  return (
-    <div style={styles.row}>
-      <span style={styles.label}>Última atualização</span>
-      <span style={isLoading ? styles.valueLoading : styles.value}>
-        {updateAtText}
-      </span>
-    </div>
-  );
+    return (
+      <>
+        <div style={styles.row}>
+          <span style={styles.label}>Última atualização</span>
+          <span style={isLoading ? styles.valueLoading : styles.value}>
+            {updateAt}
+          </span>
+        </div>
+        <div style={styles.row}>
+          <span style={styles.label}>Versão</span>
+          <span style={isLoading ? styles.valueLoading : styles.value}>
+            {opened_connections}
+          </span>
+        </div>
+        <div style={styles.row}>
+          <span style={styles.label}>Conexões abertas</span>
+          <span style={isLoading ? styles.valueLoading : styles.value}>
+            {max_connections}
+          </span>
+        </div>
+      </>
+    );
+  }
+  return loading;
 }
 
 const styles = {
