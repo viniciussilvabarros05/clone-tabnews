@@ -16,7 +16,10 @@ async function status(request, response) {
     });
     const databaseOpenedConnectionsValue =
       databaseOpenedConnectionosResult.rows[0].count;
-    const stats = { ...settings.rows[0], ...databaseMxConnectionsResult.rows[0] };
+    const stats = {
+      ...settings.rows[0],
+      ...databaseMxConnectionsResult.rows[0],
+    };
 
     response.status(200).json({
       updated_at: updatedAt,
@@ -28,12 +31,12 @@ async function status(request, response) {
         },
       },
     });
- } catch(error){
-    const publicErrorObject =  new InternalServerError({
-      cause: error
+  } catch (error) {
+    const publicErrorObject = new InternalServerError({
+      cause: error,
     });
-    console.error(publicErrorObject)
-    response.status(500).json(publicErrorObject)
+    console.error(publicErrorObject);
+    response.status(500).json(publicErrorObject);
   }
 }
 
