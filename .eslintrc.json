@@ -4,5 +4,9 @@
     "next/core-web-vitals",
     "plugin:jest/recommended",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "no-unused-vars": "error",
+    "no-undef": "error"
+  }
 }
