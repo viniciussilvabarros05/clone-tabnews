@@ -14,8 +14,8 @@ async function getHandler(request, response) {
 }
 
 async function postHandler(request, response) {
-  const migratedMigrations = await migrator.runPendingMigrator()
-  
+  const migratedMigrations = await migrator.runPendingMigrator();
+
   if (migratedMigrations.length > 0) {
     return response.status(201).json(migratedMigrations);
   }
