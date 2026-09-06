@@ -1,10 +1,10 @@
 import { runner as migrationRunner } from "node-pg-migrate";
-import { join } from "node:path";
+import { resolve } from "node:path";
 import database from "infra/database";
 
 const defaultMigrationOptions = {
   dryRun: true,
-  dir: join("infra", "migrations"), // Método usado pra evitar erro de path em S.O's diferentes (linux/windows)
+  dir: resolve("infra", "migrations"), // Método usado pra evitar erro de path em S.O's diferentes (linux/windows)
   verbose: true,
   direction: "up",
   migrationsTable: "pgmigrations",
