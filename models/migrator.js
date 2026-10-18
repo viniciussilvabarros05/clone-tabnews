@@ -7,6 +7,7 @@ const defaultMigrationOptions = {
   dir: resolve("infra", "migrations"), // Método usado pra evitar erro de path em S.O's diferentes (linux/windows)
   verbose: true,
   direction: "up",
+  log: () => {},
   migrationsTable: "pgmigrations",
 };
 
